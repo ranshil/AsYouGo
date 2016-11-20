@@ -27,19 +27,19 @@ public class Crawler {
     public static DB db = new DB();
 
     public static void main(String[] args) throws SQLException , IOException{
-        db.runSql2("Truncate record;");
+        db.runSql2("Truncate records;");
         processPage(domainFull);
     }
 
     private static void processPage(String URL) throws SQLException , IOException {
-        String sql = "select * from record where URL = '" + URL + "'";
+        String sql = "select * from records where URL = '" + URL + "'";
         ResultSet rs = db.runSql(sql);
         if(rs.next()){
 
         } else{
-            //sql = "Insert into 'record' ('URL') Values " + "(?);";
-//            sql = "INSERT INTO  `record` " + "(`URL`) VALUES " + "(?);";
-            sql = "INSERT INTO  record (URL) VALUES " + "(?);";
+            //sql = "Insert into 'records' ('URL') Values " + "(?);";
+//            sql = "INSERT INTO  `records` " + "(`URL`) VALUES " + "(?);";
+            sql = "INSERT INTO  records (URL) VALUES " + "(?);";
             PreparedStatement stmt = db.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1,URL);
             stmt.execute();
@@ -48,7 +48,7 @@ public class Crawler {
             Document doc = Jsoup.connect(URL).get();
 
             if(doc.text().contains(researchString)){
-                System.out.println(URL);
+                System.out.println("Contains research String: " + URL);
             }
 
             Elements questions = doc.select("a[href]");

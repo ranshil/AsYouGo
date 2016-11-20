@@ -3,13 +3,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+
+// currently not in use
+
 public class ReadFromWeb {
     public static void main(String[] args)  throws IOException {
 //        String url = "http://gansulamot.co.il/index.php";
         String url = "https://en.wikipedia.org/wiki/Main_Page";
         readFromWeb(url);
 //        readWeb2(url);
-
     }
 
     private static void readFromWeb(String webUrl) throws  IOException {
